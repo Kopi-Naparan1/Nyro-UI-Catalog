@@ -1,0 +1,53 @@
+﻿.ui-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-space-1);
+  font-weight: var(--ui-font-weight-medium);
+  text-decoration-color: currentColor;
+  text-underline-offset: 2px;
+  transition: color var(--ui-transition-fast), opacity var(--ui-transition-fast);
+}
+
+.ui-link:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--ui-color-brand) 45%, white);
+  outline-offset: 2px;
+  border-radius: var(--ui-radius-sm);
+}
+
+.ui-link--tone-default {
+  color: var(--ui-color-text);
+}
+
+.ui-link--tone-brand {
+  color: var(--ui-color-brand);
+}
+
+.ui-link--tone-muted {
+  color: var(--ui-color-text-muted);
+}
+
+.ui-link--tone-danger {
+  color: var(--ui-color-danger);
+}
+
+.ui-link--underline-hover {
+  text-decoration: none;
+}
+
+.ui-link--underline-hover:hover {
+  text-decoration: underline;
+}
+
+.ui-link--underline-always {
+  text-decoration: underline;
+}
+
+.ui-link--underline-none {
+  text-decoration: none;
+}
+
+.ui-link--disabled {
+  pointer-events: none;
+  opacity: 0.55;
+}
+

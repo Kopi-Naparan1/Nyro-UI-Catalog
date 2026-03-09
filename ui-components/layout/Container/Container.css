@@ -1,0 +1,10 @@
+﻿.ui-container {
+  width: 100%;
+  max-width: var(--ui-container-max-width, 64rem);
+  padding-inline: var(--ui-container-padding, var(--ui-space-4));
+}
+
+.ui-container--center {
+  margin-inline: auto;
+}
+

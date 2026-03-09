@@ -1,0 +1,94 @@
+﻿.ui-icon-button {
+  --ui-icon-button-bg: transparent;
+  --ui-icon-button-bg-hover: var(--ui-color-bg-muted);
+  --ui-icon-button-color: var(--ui-color-text);
+  --ui-icon-button-border: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ui-icon-button-border);
+  background: var(--ui-icon-button-bg);
+  color: var(--ui-icon-button-color);
+  border-radius: var(--ui-radius-md);
+  cursor: pointer;
+  transition: background var(--ui-transition-fast), border-color var(--ui-transition-fast),
+    color var(--ui-transition-fast), transform var(--ui-transition-fast);
+}
+
+.ui-icon-button:hover:not(:disabled) {
+  background: var(--ui-icon-button-bg-hover);
+  transform: translateY(-1px);
+}
+
+.ui-icon-button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--ui-color-brand) 45%, white);
+  outline-offset: 2px;
+}
+
+.ui-icon-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.ui-icon-button--sm {
+  width: 2rem;
+  height: 2rem;
+  font-size: 0.875rem;
+}
+
+.ui-icon-button--md {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1rem;
+}
+
+.ui-icon-button--lg {
+  width: 2.875rem;
+  height: 2.875rem;
+  font-size: 1.125rem;
+}
+
+.ui-icon-button--primary {
+  --ui-icon-button-bg: var(--ui-color-brand);
+  --ui-icon-button-bg-hover: var(--ui-color-brand-hover);
+  --ui-icon-button-color: #ffffff;
+  --ui-icon-button-border: transparent;
+}
+
+.ui-icon-button--secondary {
+  --ui-icon-button-bg: var(--ui-color-bg-muted);
+  --ui-icon-button-bg-hover: #e2e8f0;
+  --ui-icon-button-color: var(--ui-color-text);
+  --ui-icon-button-border: var(--ui-color-border);
+}
+
+.ui-icon-button--outline {
+  --ui-icon-button-bg: transparent;
+  --ui-icon-button-bg-hover: color-mix(in srgb, var(--ui-color-brand) 8%, white);
+  --ui-icon-button-color: var(--ui-color-brand);
+  --ui-icon-button-border: var(--ui-color-brand);
+}
+
+.ui-icon-button--danger {
+  --ui-icon-button-bg: #dc2626;
+  --ui-icon-button-bg-hover: #b91c1c;
+  --ui-icon-button-color: #ffffff;
+  --ui-icon-button-border: transparent;
+}
+
+.ui-icon-button__spinner {
+  width: 1em;
+  height: 1em;
+  border-radius: var(--ui-radius-full);
+  border: 2px solid color-mix(in srgb, currentColor 30%, transparent);
+  border-top-color: currentColor;
+  animation: ui-icon-button-spin 0.8s linear infinite;
+}
+
+@keyframes ui-icon-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+

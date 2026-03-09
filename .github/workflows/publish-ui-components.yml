@@ -1,0 +1,47 @@
+name: Publish UI Components
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "ui-components-v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          registry-url: https://npm.pkg.github.com
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate project
+        run: |
+          npm run lint
+          npm test
+          npm run build
+
+      - name: Sync UI package version from tag
+        if: startsWith(github.ref, 'refs/tags/ui-components-v')
+        run: |
+          node -e "const fs=require('node:fs');const p='ui-components/package.json';const j=JSON.parse(fs.readFileSync(p,'utf8'));j.version=process.env.GITHUB_REF_NAME.replace(/^ui-components-v/,'');fs.writeFileSync(p,JSON.stringify(j,null,2)+'\n');"
+
+      - name: Prepare package scope for GitHub owner
+        run: node scripts/prepare-ui-package-for-github.mjs "${{ github.repository_owner }}"
+
+      - name: Publish UI package
+        run: npm publish ./ui-components
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

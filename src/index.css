@@ -1,0 +1,14 @@
+﻿:root {
+  color: var(--ui-color-text);
+  background: transparent;
+  font-family: var(--ui-font-family);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-width: 320px;
+}
+

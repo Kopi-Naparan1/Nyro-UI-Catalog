@@ -1,0 +1,25 @@
+﻿.ui-stack {
+  display: flex;
+  gap: var(--ui-stack-gap, var(--ui-space-4));
+}
+
+.ui-stack--row {
+  flex-direction: row;
+}
+
+.ui-stack--column {
+  flex-direction: column;
+}
+
+.ui-stack--row-reverse {
+  flex-direction: row-reverse;
+}
+
+.ui-stack--column-reverse {
+  flex-direction: column-reverse;
+}
+
+.ui-stack--wrap {
+  flex-wrap: wrap;
+}
+

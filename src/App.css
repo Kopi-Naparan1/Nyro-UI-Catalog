@@ -1,0 +1,57 @@
+﻿#root {
+  min-height: 100vh;
+}
+
+.app-catalog {
+  min-height: 100vh;
+}
+
+.app-main {
+  padding-top: var(--ui-space-8);
+  padding-bottom: var(--ui-space-10);
+}
+
+.app-brand {
+  font-weight: var(--ui-font-weight-bold);
+  letter-spacing: 0.01em;
+}
+
+.app-section {
+  display: grid;
+  gap: var(--ui-space-5);
+  background: color-mix(in srgb, var(--ui-color-surface) 92%, #f8fafc);
+}
+
+.app-section__content {
+  display: grid;
+  gap: var(--ui-space-4);
+}
+
+.app-sidebar-demo {
+  max-width: 16rem;
+}
+
+.app-plain-trigger {
+  border: 1px dashed var(--ui-color-border-strong);
+  background: transparent;
+  border-radius: var(--ui-radius-sm);
+  padding: var(--ui-space-2) var(--ui-space-3);
+  color: var(--ui-color-text-muted);
+}
+
+.app-plain-trigger:hover {
+  border-color: var(--ui-color-brand);
+  color: var(--ui-color-brand);
+}
+
+@media (max-width: 48rem) {
+  .app-main {
+    padding-top: var(--ui-space-6);
+    padding-bottom: var(--ui-space-8);
+  }
+
+  .app-sidebar-demo {
+    max-width: none;
+  }
+}
+

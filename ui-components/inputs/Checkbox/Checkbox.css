@@ -1,0 +1,37 @@
+﻿.ui-check-field {
+  display: grid;
+  gap: var(--ui-space-2);
+}
+
+.ui-check-field__row {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+  cursor: pointer;
+}
+
+.ui-check-field__control {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--ui-color-brand);
+}
+
+.ui-check-field__label {
+  font-size: var(--ui-font-size-200);
+  color: var(--ui-color-text);
+}
+
+.ui-check-field__helper,
+.ui-check-field__error {
+  margin: 0;
+  font-size: var(--ui-font-size-100);
+}
+
+.ui-check-field__helper {
+  color: var(--ui-color-text-subtle);
+}
+
+.ui-check-field__error {
+  color: var(--ui-color-danger);
+}
+

@@ -1,0 +1,39 @@
+{
+  "name": "@spendlytics/ui-components",
+  "version": "1.0.0",
+  "description": "Reusable React UI components for Spendlytics and related apps.",
+  "private": false,
+  "license": "MIT",
+  "type": "module",
+  "main": "./index.js",
+  "module": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./buttons": "./buttons/index.js",
+    "./feedback": "./feedback/index.js",
+    "./inputs": "./inputs/index.js",
+    "./layout": "./layout/index.js",
+    "./navigation": "./navigation/index.js",
+    "./typography": "./typography/index.js",
+    "./styles/foundation.css": "./styles/foundation.css"
+  },
+  "files": [
+    "index.js",
+    "buttons",
+    "feedback",
+    "inputs",
+    "layout",
+    "navigation",
+    "typography",
+    "styles",
+    "utils"
+  ],
+  "sideEffects": [
+    "index.js",
+    "**/*.css"
+  ],
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  }
+}

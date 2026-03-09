@@ -1,0 +1,6 @@
+﻿.ui-grid {
+  display: grid;
+  width: 100%;
+  gap: var(--ui-grid-gap, var(--ui-space-4));
+}
+
