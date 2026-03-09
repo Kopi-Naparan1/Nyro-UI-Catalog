@@ -1,6 +1,6 @@
-# UI Components
+# Nyro UI Components
 
-Reusable React components for buttons, inputs, layout, navigation, and feedback.
+Reusable React components for buttons, inputs, layout, navigation, feedback, and composed SaaS/admin patterns.
 
 ## Quick Start (This Project)
 
@@ -11,6 +11,30 @@ import { Button, Card, TextInput, Modal } from "../ui-components";
 ```
 
 The `ui-components/index.js` entrypoint auto-loads `styles/foundation.css`, so tokens/base styles are available without extra imports.
+
+## Catalog Coverage
+
+The demo app (`src/App.jsx`) now includes a full, ordered catalog that renders every declared variant scale plus key states:
+
+1. Buttons: `Button`, `IconButton`
+2. Feedback: `Alert`, `Modal`, `Spinner`, `Tooltip`
+3. Inputs: `TextInput`, `TextArea`, `Select`, `Checkbox`, `RadioButton`
+4. Layout: `Container`, `Grid`, `Stack`, `Card`
+5. Navigation: `Navbar`, `Sidebar`, `Breadcrumb`, `Pagination`
+6. Typography: `Heading`, `Text`, `Badge`, `Link`
+7. Patterns: `AuthLoginForm`, `AuthPasswordResetForm`, `AppHeaderBar`, `AppSidebarShell`, `PageHeaderActions`, `FilterToolbar`, `DataTablePanel`, `EmptyStatePanel`, `ErrorStatePanel`, `SettingsFormCard`, `BillingPlanCard`, `ProfileSummaryCard`
+
+Each component section demonstrates:
+
+- enum-like prop scales (for example variants/sizes/tones/positions),
+- key UX states (`loading`, `disabled`, `error`, `required`, boundary states),
+- and representative structural options (for example header/footer, controlled/uncontrolled, collapsible behavior).
+
+Pattern sections additionally provide:
+
+- `variant` support (`standard`, `compact`),
+- operational states (`default`, `loading`, `empty` or `error`),
+- and both full-component and usage snippets for faster copy-paste adoption.
 
 ## Component Functions and Usage
 
@@ -96,6 +120,22 @@ The `ui-components/index.js` entrypoint auto-loads `styles/foundation.css`, so t
 <Badge variant="success">Active</Badge>
 ```
 
+### Patterns
+
+- `AuthLoginForm`, `AuthPasswordResetForm`: auth flows with loading and error handling.
+- `AppHeaderBar`, `AppSidebarShell`, `PageHeaderActions`: app chrome and page-level scaffolding.
+- `FilterToolbar`, `DataTablePanel`: filter/list page composition blocks.
+- `EmptyStatePanel`, `ErrorStatePanel`: reusable operational state surfaces.
+- `SettingsFormCard`, `BillingPlanCard`, `ProfileSummaryCard`: account and configuration building blocks.
+
+```jsx
+import {
+  AuthLoginForm,
+  FilterToolbar,
+  DataTablePanel,
+} from "@spendlytics/ui-components/patterns";
+```
+
 ## Reusing in Other Projects
 
 ### Option 1: Copy with setup script (recommended)
@@ -127,7 +167,7 @@ Copy the `ui-components/` folder into your target project and import from its `i
 This repo now includes [ui-components/package.json](./package.json), so you can install it directly from filesystem path in another project:
 
 ```bash
-npm install ../Spendlytics/ui-components
+npm install ../nyro-ui-catalog/ui-components
 ```
 
 Then import with the package name:
@@ -142,13 +182,19 @@ Optional category import (smaller import surface):
 import { Button, IconButton } from "@spendlytics/ui-components/buttons";
 ```
 
+Patterns category import:
+
+```jsx
+import { AppSidebarShell, PageHeaderActions } from "@spendlytics/ui-components/patterns";
+```
+
 ## Publishing as a Library (GitHub Packages)
 
 Recommended default for now: GitHub Packages. It is fast to set up from this repo and private-by-default to your GitHub org/user.
 
 ### Package naming
 
-- Development/local package name: `@spendlytics/ui-components`
+- Development/local package name (kept for compatibility): `@spendlytics/ui-components`
 - Published GitHub package name: `@<github-owner>/ui-components`
 
 The publish workflow automatically rewrites the package scope to your actual GitHub owner before publishing.
@@ -194,5 +240,13 @@ Setup is now straightforward:
 - Local package installation support (`npm install <path-to-ui-components>`).
 - GitHub publish workflow for package releases.
 - Foundation styles are auto-loaded when importing from the entrypoint.
+- Pattern imports are available through `@spendlytics/ui-components/patterns`.
+
+## Pattern Contribution Rules
+
+- Include `variant` prop with `standard` and `compact`.
+- Include operational state prop coverage (`default`, `loading`, `empty|error`) where applicable.
+- Include both a full component snippet and a usage snippet in catalog metadata.
+- Keep patterns dependency-free (compose from existing primitives + React only).
 
 For broader public distribution later, you can add npmjs publishing as a second registry target.

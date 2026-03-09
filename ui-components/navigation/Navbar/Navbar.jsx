@@ -1,10 +1,10 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import { cx } from "../../utils/cx";
 import "./Navbar.css";
 
 /*
  * Function: Renders a top navigation bar with brand, links, and optional actions.
- * Usage: <Navbar brand="Spendlytics" items={[{ label: "Home", href: "/" }]} />
+ * Usage: <Navbar brand="Nyro" items={[{ label: "Home", href: "/" }]} />
  */
 export default function Navbar({
   brand,

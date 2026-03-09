@@ -1,7 +1,7 @@
 {
   "name": "@spendlytics/ui-components",
   "version": "1.0.0",
-  "description": "Reusable React UI components for Spendlytics and related apps.",
+  "description": "Reusable React UI components for Nyro and related apps.",
   "private": false,
   "license": "MIT",
   "type": "module",
@@ -14,6 +14,7 @@
     "./inputs": "./inputs/index.js",
     "./layout": "./layout/index.js",
     "./navigation": "./navigation/index.js",
+    "./patterns": "./patterns/index.js",
     "./typography": "./typography/index.js",
     "./styles/foundation.css": "./styles/foundation.css"
   },
@@ -24,6 +25,7 @@
     "inputs",
     "layout",
     "navigation",
+    "patterns",
     "typography",
     "styles",
     "utils"

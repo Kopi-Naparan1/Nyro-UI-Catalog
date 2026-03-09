@@ -8,7 +8,10 @@ export default defineConfig({
     setupFiles: "./vitest.setup.js",
     globals: true,
     css: true,
-    include: ["ui-components/__tests__/**/*.test.{js,jsx}"],
+    include: [
+      "ui-components/__tests__/**/*.test.{js,jsx}",
+      "src/**/*.test.{js,jsx}",
+    ],
   },
 });
 
