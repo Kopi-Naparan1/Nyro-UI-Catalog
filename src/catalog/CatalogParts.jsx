@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Button, Card, Heading, Text, Stack } from "../../ui-components";
 import { COMPONENT_GUIDES } from "./catalogMeta";
 
@@ -47,38 +47,89 @@ export function CatalogGroup({ id, title, description, children }) {
   );
 }
 
-export function ComponentSection({ id, title, description, children }) {
-  const guide = COMPONENT_GUIDES[id];
+export function ComponentSection({
+  id,
+  title,
+  description,
+  guide: guideOverride,
+  children,
+  lazy = false,
+  lazyRootMargin = "240px 0px",
+  lazyPlaceholder = null,
+}) {
+  const guide = guideOverride || COMPONENT_GUIDES[id];
   const [copyStateBySnippet, setCopyStateBySnippet] = useState({});
   const copyResetTimers = useRef({});
+  const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(!lazy);
+  const shouldRenderDetails = !lazy || isVisible;
 
-  const snippetCards = guide
-    ? [
-        {
-          key: "primary",
-          title: guide.snippetTitle,
-          code: guide.snippetCode,
-          buttonLabel: `Copy snippet for ${title}`,
-        },
-        ...(guide.secondarySnippetCode
-          ? [
-              {
-                key: "secondary",
-                title: guide.secondarySnippetTitle || "Usage snippet",
-                code: guide.secondarySnippetCode,
-                buttonLabel: `Copy usage snippet for ${title}`,
-              },
-            ]
-          : []),
-      ].filter((item) => item.title && item.code)
-    : [];
+  const snippetCards = useMemo(() => {
+    if (!shouldRenderDetails || !guide) {
+      return [];
+    }
 
+    const cards = Array.isArray(guide.snippets)
+      ? guide.snippets
+      : [
+          {
+            key: "primary",
+            title: guide.snippetTitle,
+            code: guide.snippetCode,
+            buttonLabel: `Copy snippet for ${title}`,
+          },
+          ...(guide.secondarySnippetCode
+            ? [
+                {
+                  key: "secondary",
+                  title: guide.secondarySnippetTitle || "Usage snippet",
+                  code: guide.secondarySnippetCode,
+                  buttonLabel: `Copy usage snippet for ${title}`,
+                },
+              ]
+            : []),
+        ];
+
+    return cards.filter((item) => item?.title && item?.code);
+  }, [guide, shouldRenderDetails, title]);
+ 
   useEffect(() => {
     return () => {
       Object.values(copyResetTimers.current).forEach((timeoutId) => clearTimeout(timeoutId));
       copyResetTimers.current = {};
     };
   }, []);
+
+  useEffect(() => {
+    if (!lazy || isVisible) {
+      return;
+    }
+
+    if (typeof window === "undefined" || typeof IntersectionObserver === "undefined") {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: lazyRootMargin },
+    );
+
+    const node = sectionRef.current;
+
+    if (node) {
+      observer.observe(node);
+    } else {
+      setIsVisible(true);
+    }
+
+    return () => observer.disconnect();
+  }, [isVisible, lazy, lazyRootMargin]);
 
   const handleCopySnippet = async (snippetKey, snippetCode) => {
     if (!snippetCode) {
@@ -124,8 +175,16 @@ export function ComponentSection({ id, title, description, children }) {
     return "Ready to copy.";
   };
 
+  const fallback = lazyPlaceholder || <div className="app-lazy-placeholder" aria-hidden="true" />;
+
   return (
-    <section id={id} className="app-component-section" aria-labelledby={`${id}-title`}>
+    <section
+      id={id}
+      ref={sectionRef}
+      className="app-component-section"
+      aria-labelledby={`${id}-title`}
+      aria-busy={lazy && !isVisible}
+    >
       <Card bordered elevated padding="lg">
         <Stack gap="md">
           <header className="app-component-section__header">
@@ -134,7 +193,7 @@ export function ComponentSection({ id, title, description, children }) {
             </Heading>
             <Text tone="muted">{description}</Text>
           </header>
-          {guide ? (
+          {shouldRenderDetails && guide ? (
             <section className="app-section-guide" aria-label={`${title} usage guidance`}>
               <div className="app-section-guide__facts">
                 <article className="app-section-guide__fact">
@@ -207,7 +266,7 @@ export function ComponentSection({ id, title, description, children }) {
               })}
             </section>
           ) : null}
-          <div className="app-component-section__content">{children}</div>
+          <div className="app-component-section__content">{shouldRenderDetails ? children : fallback}</div>
         </Stack>
       </Card>
     </section>

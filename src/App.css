@@ -15,6 +15,89 @@
   padding-block: var(--ui-space-2);
 }
 
+.app-overview__meta {
+  display: grid;
+  gap: var(--ui-space-2);
+}
+
+.app-overview__stats {
+  display: flex;
+  gap: var(--ui-space-2);
+  flex-wrap: wrap;
+}
+
+.app-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--ui-space-4);
+  flex-wrap: wrap;
+  padding: var(--ui-space-3);
+  border: 1px solid var(--ui-color-border);
+  border-radius: var(--ui-radius-lg);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(248, 250, 252, 0.94));
+}
+
+.app-scope-toggle {
+  display: inline-flex;
+  gap: var(--ui-space-2);
+  padding: var(--ui-space-1);
+  border-radius: var(--ui-radius-full);
+  background: var(--ui-color-bg-muted);
+  border: 1px solid var(--ui-color-border);
+}
+
+.app-scope-toggle__button {
+  border: 0;
+  background: transparent;
+  padding: 0.7rem 1rem;
+  border-radius: var(--ui-radius-full);
+  color: var(--ui-color-text-muted);
+  cursor: pointer;
+  font: inherit;
+  transition: background var(--ui-transition-fast), color var(--ui-transition-fast), transform var(--ui-transition-fast);
+}
+
+.app-scope-toggle__button:hover {
+  color: var(--ui-color-text);
+  transform: translateY(-1px);
+}
+
+.app-scope-toggle__button--active {
+  background: var(--ui-color-brand);
+  color: var(--ui-color-text-on-brand);
+  box-shadow: var(--ui-shadow-sm);
+}
+
+.app-search {
+  min-width: min(100%, 24rem);
+  display: grid;
+  gap: var(--ui-space-1);
+}
+
+.app-search__label {
+  font-size: var(--ui-font-size-100);
+  color: var(--ui-color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.app-search input {
+  width: 100%;
+  min-height: 2.9rem;
+  border: 1px solid var(--ui-color-border);
+  border-radius: var(--ui-radius-full);
+  padding: 0.85rem 1rem;
+  background: var(--ui-color-surface);
+  transition: border-color var(--ui-transition-fast), box-shadow var(--ui-transition-fast);
+}
+
+.app-search input:focus {
+  outline: 0;
+  border-color: var(--ui-color-brand);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ui-color-brand) 16%, transparent);
+}
+
 .app-brand {
   font-weight: var(--ui-font-weight-bold);
   letter-spacing: 0.01em;
@@ -109,6 +192,28 @@
 .app-component-section__content {
   display: grid;
   gap: var(--ui-space-4);
+}
+
+.app-lazy-placeholder {
+  min-height: 16rem;
+  border-radius: var(--ui-radius-md);
+  background: linear-gradient(
+    120deg,
+    rgba(15, 23, 42, 0.05) 0%,
+    rgba(15, 23, 42, 0.1) 40%,
+    rgba(15, 23, 42, 0.05) 80%
+  );
+  background-size: 200% 100%;
+  animation: app-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes app-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
 }
 
 .app-section-guide {
@@ -358,6 +463,23 @@
   .app-main {
     padding-top: var(--ui-space-6);
     padding-bottom: var(--ui-space-8);
+  }
+
+  .app-toolbar {
+    align-items: stretch;
+  }
+
+  .app-scope-toggle {
+    width: 100%;
+  }
+
+  .app-scope-toggle__button {
+    flex: 1 1 0;
+    text-align: center;
+  }
+
+  .app-search {
+    width: 100%;
   }
 
   .app-catalog-content {

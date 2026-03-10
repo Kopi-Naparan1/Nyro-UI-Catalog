@@ -1,4 +1,3 @@
-import "../styles/foundation.css";
 import "./patterns.css";
 
 export { default as AuthLoginForm } from "./AuthLoginForm/AuthLoginForm";

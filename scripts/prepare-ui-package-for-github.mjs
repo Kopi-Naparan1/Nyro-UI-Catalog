@@ -20,12 +20,33 @@ if (!/^[a-z0-9-]+$/.test(owner)) {
 }
 
 const packagePath = path.resolve(__dirname, "..", "ui-components", "package.json");
+const distDir = path.resolve(__dirname, "..", "ui-components", "dist");
 const packageJson = JSON.parse(fs.readFileSync(packagePath, "utf8"));
 
 packageJson.name = `@${owner}/ui-components`;
 packageJson.publishConfig = {
   registry: "https://npm.pkg.github.com",
 };
+
+if (!fs.existsSync(distDir)) {
+  console.error("Missing ui-components/dist. Run `npm run ui:build` before publishing.");
+  process.exit(1);
+}
+
+packageJson.main = "./dist/index.js";
+packageJson.module = "./dist/index.js";
+packageJson.exports = {
+  ".": "./dist/index.js",
+  "./buttons": "./dist/buttons/index.js",
+  "./feedback": "./dist/feedback/index.js",
+  "./inputs": "./dist/inputs/index.js",
+  "./layout": "./dist/layout/index.js",
+  "./navigation": "./dist/navigation/index.js",
+  "./patterns": "./dist/patterns/index.js",
+  "./typography": "./dist/typography/index.js",
+  "./styles/foundation.css": "./styles/foundation.css",
+};
+packageJson.files = ["dist", "styles", "README.md"];
 
 fs.writeFileSync(packagePath, `${JSON.stringify(packageJson, null, 2)}\n`);
 

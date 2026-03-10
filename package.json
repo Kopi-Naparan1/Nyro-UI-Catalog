@@ -9,14 +9,16 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "setup:ui": "node setup-ui-components.js",
+    "ui:build": "node scripts/build-ui-components.mjs",
     "ui:prepare:github": "node scripts/prepare-ui-package-for-github.mjs",
     "ui:pack": "npm pack ./ui-components --dry-run",
     "test": "vitest run",
     "test:watch": "vitest"
   },
   "dependencies": {
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "spendlytics": "file:../Spendlytics"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
@@ -26,6 +28,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
+    "esbuild": "^0.25.10",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",

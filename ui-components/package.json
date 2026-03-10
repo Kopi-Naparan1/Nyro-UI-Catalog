@@ -31,7 +31,6 @@
     "utils"
   ],
   "sideEffects": [
-    "index.js",
     "**/*.css"
   ],
   "peerDependencies": {

@@ -10,7 +10,11 @@ Import from the library entrypoint instead of deep file paths:
 import { Button, Card, TextInput, Modal } from "../ui-components";
 ```
 
-The `ui-components/index.js` entrypoint auto-loads `styles/foundation.css`, so tokens/base styles are available without extra imports.
+Load foundation styles once near your app entrypoint:
+
+```jsx
+import "../ui-components/styles/foundation.css";
+```
 
 ## Catalog Coverage
 
@@ -158,6 +162,12 @@ After copying, in the target project import from the copied entrypoint:
 import { Button, Card, TextInput } from "../ui-components";
 ```
 
+And load foundation styles once:
+
+```jsx
+import "../ui-components/styles/foundation.css";
+```
+
 ### Option 2: Manual copy
 
 Copy the `ui-components/` folder into your target project and import from its `index.js`.
@@ -174,6 +184,12 @@ Then import with the package name:
 
 ```jsx
 import { Button, Card, TextInput } from "@spendlytics/ui-components";
+```
+
+Load foundation styles once in your app:
+
+```jsx
+import "@spendlytics/ui-components/styles/foundation.css";
 ```
 
 Optional category import (smaller import surface):
@@ -212,6 +228,18 @@ git push origin ui-components-v1.0.1
 
 The workflow file is [`.github/workflows/publish-ui-components.yml`](../.github/workflows/publish-ui-components.yml).
 
+### Manual publish (local)
+
+From the repo root:
+
+```bash
+npm run ui:build
+npm run ui:prepare:github -- <github-owner>
+npm publish ./ui-components --registry=https://npm.pkg.github.com
+```
+
+Note: `ui:prepare:github` rewrites `ui-components/package.json` for publishing (dist exports + scoped name). Do not commit those changes back to your main branch.
+
 ### Install from another project
 
 ```bash
@@ -239,7 +267,7 @@ Setup is now straightforward:
 - One command copy script (`npm run setup:ui -- <target>`).
 - Local package installation support (`npm install <path-to-ui-components>`).
 - GitHub publish workflow for package releases.
-- Foundation styles are auto-loaded when importing from the entrypoint.
+- Foundation styles are loaded once at the app entrypoint.
 - Pattern imports are available through `@spendlytics/ui-components/patterns`.
 
 ## Pattern Contribution Rules
